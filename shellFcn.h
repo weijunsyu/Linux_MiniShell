@@ -2,7 +2,7 @@
 #define SHELLFCN_H
 
 /* Print the prompt. */
-extern void printPromt(char* promptString);
+extern void printPromt(const char* promptString);
 
 /* Run one iteration of a command returning 1 meaning continue or 0 meaning quit. */
 extern int runShell(char** envp);
@@ -21,11 +21,15 @@ extern int doBuiltIn(char** args);
 /* Run the command line in its entirety returning 1 if successful. */
 extern int runCmdLine(char* path, char** paths, char* cmd, char** args, char** envp);
 
-/*Run singular command, given some mode:
+/* Run the command segment returning 1 if successful. */
+extern int runCmdSegment(char* path, char** paths, char* cmd, char** args, char** envp, int mode);
+
+/* Run singular command, given some mode:
     0 = run in foreground
-    ; = run in foreground
-    & = run in background */
-extern void runCmd(char* path, char** paths, char* cmd, char** args, char** envp, char mode);
+    1 = run in background
+    returning 1 if successful, 0 otherwise.
+*/
+extern int runCmd(char* path, char** paths, char* cmd, char** args, char** envp, int mode);
 
 /* Obtain the full path of the given commmand returning 1 if successful, 0
 otherwise. */

@@ -66,7 +66,7 @@ extern char** strSplitPtr(char* source, char* delimiters, int* numSubStr);
 
 /* Parse over source string splitting it up given delimiters and store
 arguments in array of which is NULL terminating. Store size of useful array in
-numSize (number of non-NULL args). Mutates source string turning all instances
+numStr (number of non-NULL args). Mutates source string turning all instances
 of delimiters into null char (\0). */
 extern void parse(char** array, char* source, char* delimiters, int* numStr);
 

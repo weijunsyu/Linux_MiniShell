@@ -6,7 +6,7 @@ minishell.o: minishell.c strFcn.h fileFcn.h shellFcn.h
 strFcn.o: strFcn.c strFcn.h
 	gcc -c strFcn.c -o strFcn.o -Wall -pedantic
 
-fileFcn.o: fileFcn.c fileFcn.h #strFcn.h
+fileFcn.o: fileFcn.c fileFcn.h
 	gcc -c fileFcn.c -o fileFcn.o -Wall -pedantic
 
 shellFcn.o: shellFcn.c shellfcn.h fileFcn.h strFcn.h
