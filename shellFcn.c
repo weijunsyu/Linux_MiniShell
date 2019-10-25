@@ -9,6 +9,7 @@
 #include "shellFcn.h"
 #include "strFcn.h"
 #include "fileFcn.h"
+#include "builtInFcn.h"
 
 //constants:
 #define LINE_LEN 80
@@ -58,16 +59,35 @@ void getArgs(char* line, char** args, char* delimiters) {
     //parse line
     int numArgs = 0;
     parse(args, line, delimiters, &numArgs);
+
+    /*
+    //debug NOT working
+    int i;
+    for(i=0;i < numArgs;i++) {
+        printf(args[i] + '\n');
+    }
+    */
+
 }
 
 int doCmdLine(char* path, char** paths, char* cmd, char** args, char** envp) {
+
+    //OLD code:
     int ret;
 
     ret = doBuiltIn(args);
     if (ret == -1) {//not builtin
         ret = runCmdLine(path, paths, cmd, args, envp); //if successful return 1 to continue loop
-    }//else, cmd was built-in AND was executed during doBuiltIn fcn call
+    }//else, cmd was built-in AND was executed during doBuiltIn fcn call (ret thus set by doBuiltIn)
     return ret;
+
+
+    /*
+    int ret;
+
+    //parse over list of arguments and split up command into segments
+    */
+
 
 }
 
@@ -78,6 +98,10 @@ int doCmdLine(char* path, char** paths, char* cmd, char** args, char** envp) {
          return 0;
      }
      //builtin that do not affect the loop like exit return 1
+     if (strcmp(cmd, "SnakeEaster") == 0) {
+         snakeGame();
+         return 1;
+     }
 
      return -1; //return -1 to indicate cmd NOT builtin
  }
@@ -112,6 +136,10 @@ int runCmdLine(char* path, char** paths, char* cmd, char** args, char** envp) {
         }
     }
     return flag;
+}
+
+void readCmdBlock(char* cmd, char** args) {
+
 }
 
 int runCmdSegment(char* path, char** paths, char* cmd, char** args, char** envp, int mode) {
@@ -153,7 +181,7 @@ int getCmdPath(char* path, char** paths, char* cmd, char** args) {
 void executeCmd(char* cmd, char** args, char** envp, int mode) {
     int child_pid;
     int status;
-    if (mode == 0) { //fg
+    if (mode == 0) { //foreground
         child_pid = fork();
         if (child_pid == 0) { //child process
             execve(cmd, args, envp);
@@ -162,7 +190,7 @@ void executeCmd(char* cmd, char** args, char** envp, int mode) {
             waitpid(child_pid, &status, NULL);
         }
     }
-    else if (mode == 1) { //bg
+    else if (mode == 1) { //background
         child_pid = fork();
         if (child_pid == 0) { //child process
             execve(cmd, args, envp);
@@ -172,6 +200,7 @@ void executeCmd(char* cmd, char** args, char** envp, int mode) {
         }
     }
 }
+
 
 
 /*

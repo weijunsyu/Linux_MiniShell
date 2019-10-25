@@ -167,3 +167,13 @@ void parse(char** array, char* source, char* delimiters, int* numStr) {
     }
     array[*numStr] = NULL; //set the last pointer to NULL to mark end of array
 }
+/*
+int readSeg(char* source, char* delimiters, int* segments) {
+    int numSeg = 0;
+    char* current = source;
+    while(*current != '\0') {
+        if ()
+    }
+
+}
+*/

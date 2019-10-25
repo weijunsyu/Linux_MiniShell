@@ -21,6 +21,8 @@ extern int doBuiltIn(char** args);
 /* Run the command line in its entirety returning 1 if successful. */
 extern int runCmdLine(char* path, char** paths, char* cmd, char** args, char** envp);
 
+/* Get the command blocks given the meta characters. */
+extern void readCmdBlock(char* cmd, char** args);
 /* Run the command segment returning 1 if successful. */
 extern int runCmdSegment(char* path, char** paths, char* cmd, char** args, char** envp, int mode);
 

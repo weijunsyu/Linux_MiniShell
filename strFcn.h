@@ -70,4 +70,10 @@ numStr (number of non-NULL args). Mutates source string turning all instances
 of delimiters into null char (\0). */
 extern void parse(char** array, char* source, char* delimiters, int* numStr);
 
+/* Parse over source string given delimiters and store the number of arguments
+in a segment chunk of the command in array segments and return the length of
+the array. */
+/*
+extern int readSeg(char* source, char* delimiters, int* segments);
+*/
 #endif
